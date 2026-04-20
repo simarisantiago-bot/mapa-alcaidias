@@ -253,7 +253,7 @@ const PERFILES = {
   'LGTBIQ+':        { color: '#a855f7', label: 'LGTBIQ+' },
   'VALETUDINARIOS': { color: '#f97316', label: 'Valetudinarios' },
   'TRANSITORIOS':   { color: '#6b7280', label: 'Transitorios' },
-  'EX FUERZA':      { color: '#14b8a6', label: 'Ex Fuerza / Contraventores' },
+  'EX FUERZA':      { color: '#14b8a6', label: 'Ex Fuerza' },
 };
 
 const datos = [
@@ -271,15 +271,13 @@ const datos = [
   { n: 'Alcaidía 4 Zavaleta',                   dir: 'Zavaleta 425',                    p: 'COMUNES',        d: 5,  lat: -34.641950, lng: -58.402830, s: 'Sur 1' },
   { n: 'Alcaidía 4 Quilmes',                    dir: 'Quilmes 456',                     p: 'COMUNES',        d: 2,  lat: -34.644764, lng: -58.417062, s: 'Sur 1' },
   { n: 'Complejo California (Comunes)',          dir: 'California 1850',                 p: 'COMUNES',        d: 1,  lat: -34.647216, lng: -58.374693, s: 'Sur 1' },
-  { n: 'Complejo California (Comunes) 2',       dir: 'California 1850',                 p: 'COMUNES',        d: 0,  lat: -34.647216, lng: -58.374993, s: 'Sur 1' },
   { n: 'Complejo California (Abuso Sexual)',     dir: 'California 1850',                 p: 'ABUSO SEXUAL',   d: 2,  lat: -34.647516, lng: -58.374693, s: 'Sur 1' },
   { n: 'Alcaidía 4 Vélez Sarsfield',            dir: 'Luzuriaga 185',                   p: 'COMUNES',        d: 1,  lat: -34.636172, lng: -58.389629, s: 'Sur 1' },
   { n: 'Alcaidía 4 Montes de Oca (Comunes)',    dir: 'Montes de Oca 861',               p: 'COMUNES',        d: 0,  lat: -34.638071, lng: -58.375028, s: 'Sur 1' },
-  { n: 'Alcaidía 4 Montes de Oca (Ex Fuerza)',  dir: 'Montes de Oca 861',               p: 'EX FUERZA',      d: 0,  lat: -34.638371, lng: -58.375028, s: 'Sur 1' },
+  { n: 'Alcaidía 4 Montes de Oca (Asimilados / Ex Fuerza)', dir: 'Montes de Oca 861',  p: 'EX FUERZA',      d: 0,  lat: -34.638371, lng: -58.375028, s: 'Sur 1' },
   { n: 'Alcaidía 4 Pinzón',                     dir: 'Pinzón 456',                      p: 'COMUNES',        d: 1,  lat: -34.634104, lng: -58.360666, s: 'Sur 1' },
   // ── SUR 2 ───────────────────────────────────────────────────────────────
   { n: 'Complejo 8 (Comunes)',                  dir: 'Delfo Cabrera y 23 de Junio',     p: 'COMUNES',        d: 2,  lat: -34.673689, lng: -58.456554, s: 'Sur 2' },
-  { n: 'Complejo 8 (Comunes) 2',               dir: 'Delfo Cabrera y 23 de Junio',     p: 'COMUNES',        d: 0,  lat: -34.673689, lng: -58.456854, s: 'Sur 2' },
   { n: 'Complejo 8 (Abuso Sexual)',             dir: 'Delfo Cabrera y 23 de Junio',     p: 'ABUSO SEXUAL',   d: 4,  lat: -34.673989, lng: -58.456554, s: 'Sur 2' },
   { n: 'Alcaidía 8 Ana Díaz',                   dir: 'Ana Díaz 5651',                   p: 'COMUNES',        d: 2,  lat: -34.681581, lng: -58.467409, s: 'Sur 2' },
   { n: 'Alcaidía 8 Martiniano Leguizamón',      dir: 'Martiniano Leguizamón 4347',      p: 'COMUNES',        d: 1,  lat: -34.679117, lng: -58.474946, s: 'Sur 2' },
@@ -301,7 +299,6 @@ const datos = [
   { n: 'Alcaidía 7 Rivera Indarte',             dir: 'Rivera Indarte 864',              p: 'COMUNES',        d: 4,  lat: -34.638365, lng: -58.456459, s: 'Oeste 3' },
   // ── NORTE 1 ─────────────────────────────────────────────────────────────
   { n: 'Alcaidía 12 Ramallo (Comunes)',         dir: 'Ramallo 4398',                    p: 'COMUNES',        d: 2,  lat: -34.551215, lng: -58.490691, s: 'Norte 1' },
-  { n: 'Alcaidía 12 Ramallo (Comunes) 2',      dir: 'Ramallo 4398',                    p: 'COMUNES',        d: 0,  lat: -34.551215, lng: -58.490991, s: 'Norte 1' },
   { n: 'Alcaidía 12 Ramallo (Valetudinarios)',  dir: 'Ramallo 4398',                    p: 'VALETUDINARIOS', d: 5,  lat: -34.551515, lng: -58.490691, s: 'Norte 1' },
   { n: 'Alcaidía 12 Machaín',                   dir: 'Machaín 3045',                    p: 'COMUNES',        d: 0,  lat: -34.565176, lng: -58.482616, s: 'Norte 1' },
   { n: 'Alcaidía 12 Olazábal',                  dir: 'Olazábal 5437',                   p: 'COMUNES',        d: 0,  lat: -34.578663, lng: -58.490212, s: 'Norte 1' },
@@ -381,12 +378,13 @@ const resultsDiv  = document.getElementById('results');
 
 function renderResults(query) {
   const q = query.trim().toLowerCase();
-  const filtered = q
+  const filtered = (q
     ? markers.filter(m =>
         m.data.n.toLowerCase().includes(q) ||
         m.data.dir.toLowerCase().includes(q)
       )
-    : markers;
+    : [...markers]
+  ).sort((a, b) => a.data.n.localeCompare(b.data.n, 'es'));
 
   if (filtered.length === 0) {
     resultsDiv.innerHTML = '<div class="no-results">Sin resultados</div>';
