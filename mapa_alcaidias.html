@@ -59,7 +59,88 @@
       letter-spacing: 0.05em;
     }
 
-    #map { height: calc(100vh - 58px); width: 100%; }
+    #content {
+      display: flex;
+      height: calc(100vh - 58px);
+    }
+
+    #sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: #1e293b;
+      border-right: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #search-wrap {
+      padding: 10px;
+      border-bottom: 1px solid #334155;
+    }
+
+    #search-input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 8px 10px;
+      color: #e2e8f0;
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    #search-input::placeholder { color: #475569; }
+    #search-input:focus { border-color: #60a5fa; }
+
+    #results {
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    #results::-webkit-scrollbar { width: 4px; }
+    #results::-webkit-scrollbar-track { background: transparent; }
+    #results::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .result-item {
+      padding: 9px 12px;
+      border-bottom: 1px solid #1e293b;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .result-item:hover { background: #0f172a; }
+
+    .result-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 2px;
+    }
+
+    .result-dir {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+
+    .result-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 5px;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .no-results {
+      padding: 16px 12px;
+      font-size: 0.78rem;
+      color: #475569;
+      text-align: center;
+    }
+
+    #map { flex: 1; height: 100%; }
 
     /* Popup styling */
     .leaflet-popup-content-wrapper {
@@ -154,7 +235,15 @@
   </div>
 </div>
 
-<div id="map"></div>
+<div id="content">
+  <div id="sidebar">
+    <div id="search-wrap">
+      <input id="search-input" type="text" placeholder="🔍 Buscar alcaidía o dirección…" autocomplete="off">
+    </div>
+    <div id="results"></div>
+  </div>
+  <div id="map"></div>
+</div>
 
 <script>
 const PERFILES = {
@@ -196,7 +285,7 @@ const datos = [
   { n: 'Alcaidía 8 Martiniano Leguizamón',      dir: 'Martiniano Leguizamón 4347',      p: 'COMUNES',        d: 1,  lat: -34.679117, lng: -58.474946, s: 'Sur 2' },
   { n: 'Complejo 8 Fernández de la Cruz (Abuso)', dir: 'Fernández de la Cruz 5850',     p: 'ABUSO SEXUAL',   d: 9,  lat: -34.682402, lng: -58.469346, s: 'Sur 2' },
   // ── SUR 3 ───────────────────────────────────────────────────────────────
-  { n: 'Alcaidía 9 Gana',                       dir: 'Gana 430',                        p: 'COMUNES',        d: 1,  lat: -34.628580, lng: -58.528245, s: 'Sur 3' },
+  { n: 'Alcaidía 9 Gana',                       dir: 'Gana 430',                        p: 'COMUNES',        d: 1,  lat: -34.634915, lng: -58.527297, s: 'Sur 3' },
   { n: 'Alcaidía 9 Barragán',                   dir: 'Barragán 306',                    p: 'COMUNES',        d: 0,  lat: -34.636618, lng: -58.522969, s: 'Sur 3' },
   { n: 'Alcaidía 9 Remedios',                   dir: 'Remedios 3748',                   p: 'COMUNES',        d: 3,  lat: -34.641530, lng: -58.476203, s: 'Sur 3' },
   // ── OESTE 1 ─────────────────────────────────────────────────────────────
@@ -254,6 +343,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // ── Marcadores ──────────────────────────────────────────────────────────────
+const markers = [];
+
 datos.forEach(function(a) {
   const cfg = PERFILES[a.p] || { color: '#888', label: a.p };
 
@@ -281,7 +372,48 @@ datos.forEach(function(a) {
   `, { maxWidth: 260 });
 
   marker.addTo(map);
+  markers.push({ data: a, marker, cfg });
 });
+
+// ── Buscador ────────────────────────────────────────────────────────────────
+const searchInput = document.getElementById('search-input');
+const resultsDiv  = document.getElementById('results');
+
+function renderResults(query) {
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? markers.filter(m =>
+        m.data.n.toLowerCase().includes(q) ||
+        m.data.dir.toLowerCase().includes(q)
+      )
+    : markers;
+
+  if (filtered.length === 0) {
+    resultsDiv.innerHTML = '<div class="no-results">Sin resultados</div>';
+    return;
+  }
+
+  resultsDiv.innerHTML = filtered.map((m, i) => `
+    <div class="result-item" data-idx="${markers.indexOf(m)}">
+      <div class="result-name">
+        <span class="result-dot" style="background:${m.cfg.color}"></span>${m.data.n}
+      </div>
+      <div class="result-dir">${m.data.dir}</div>
+    </div>
+  `).join('');
+
+  resultsDiv.querySelectorAll('.result-item').forEach(el => {
+    el.addEventListener('click', function() {
+      const idx = parseInt(this.dataset.idx);
+      const { data, marker } = markers[idx];
+      map.setView([data.lat, data.lng], 17);
+      marker.openPopup();
+    });
+  });
+}
+
+renderResults('');
+searchInput.addEventListener('input', e => renderResults(e.target.value));
 
 // ── Leyenda ─────────────────────────────────────────────────────────────────
 const legend = L.control({ position: 'bottomright' });
