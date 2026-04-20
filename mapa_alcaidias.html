@@ -378,13 +378,38 @@ const resultsDiv  = document.getElementById('results');
 
 function renderResults(query) {
   const q = query.trim().toLowerCase();
+  function sortKey(name) {
+    const n = name.toLowerCase();
+    let group = 4, num = 0, suffix = n;
+    if (n.startsWith('alcaid')) {
+      group = 1;
+      const m = name.match(/alcaid[íi]a\s+(\d+)/i);
+      num = m ? parseInt(m[1]) : 999;
+      suffix = name.replace(/alcaid[íi]a\s+\d+\s*/i, '').toLowerCase();
+    } else if (n.startsWith('cad')) {
+      group = 2;
+      suffix = n;
+    } else if (n.startsWith('complejo') || n.startsWith('centro')) {
+      group = 3;
+      suffix = n;
+    }
+    return { group, num, suffix };
+  }
+
+  function customSort(a, b) {
+    const ka = sortKey(a.data.n), kb = sortKey(b.data.n);
+    if (ka.group !== kb.group) return ka.group - kb.group;
+    if (ka.num !== kb.num) return ka.num - kb.num;
+    return ka.suffix.localeCompare(kb.suffix, 'es');
+  }
+
   const filtered = (q
     ? markers.filter(m =>
         m.data.n.toLowerCase().includes(q) ||
         m.data.dir.toLowerCase().includes(q)
       )
     : [...markers]
-  ).sort((a, b) => a.data.n.localeCompare(b.data.n, 'es'));
+  ).sort(customSort);
 
   if (filtered.length === 0) {
     resultsDiv.innerHTML = '<div class="no-results">Sin resultados</div>';
