@@ -364,10 +364,6 @@ const datos = [
   { n: 'Alcaidía 4 Cochabamba',                 dir: 'Cochabamba 120',                  p: 'TRANSITORIOS',   d: 2,  lat: -34.622793, lng: -58.367105, s: 'Otros' },
 ];
 
-// Elimina íconos default de Leaflet (evita cruces/marcadores rotos)
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({ iconUrl: '', iconRetinaUrl: '', shadowUrl: '' });
-
 // ── Mapa ────────────────────────────────────────────────────────────────────
 const map = L.map('map', {
   center: [-34.6100, -58.4350],
