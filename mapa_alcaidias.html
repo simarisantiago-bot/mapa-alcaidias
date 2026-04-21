@@ -8,7 +8,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; color: #e2e8f0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; color: #e2e8f0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
 
     #header {
       background: #1e293b;
@@ -20,7 +20,36 @@
       flex-wrap: wrap;
       gap: 8px;
       min-height: 58px;
+      flex-shrink: 0;
+      overflow: hidden;
+      max-height: 120px;
+      transition: max-height 0.28s ease, padding 0.28s ease, border-color 0.28s ease;
     }
+
+    #header.collapsed {
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-color: transparent;
+    }
+
+    #header-toggle {
+      position: fixed;
+      top: 10px;
+      right: 14px;
+      z-index: 2000;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #94a3b8;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      cursor: pointer;
+      line-height: 1;
+      transition: background 0.15s, top 0.28s ease;
+    }
+
+    #header-toggle:hover { background: #334155; color: #f1f5f9; }
 
     #header h1 {
       font-size: 1rem;
@@ -61,7 +90,8 @@
 
     #content {
       display: flex;
-      height: calc(100vh - 58px);
+      flex: 1;
+      min-height: 0;
       position: relative;
     }
 
@@ -258,6 +288,8 @@
   </style>
 </head>
 <body>
+
+<button id="header-toggle" title="Ocultar encabezado">▲</button>
 
 <div id="header">
   <h1>Alcaidías &amp; CAD — <span>Policía de la Ciudad de Buenos Aires</span> · 09-04-2026</h1>
@@ -490,6 +522,18 @@ toggleBtn.addEventListener('click', function() {
   toggleBtn.textContent = collapsed ? '▶' : '◀';
   toggleBtn.style.left = collapsed ? '0' : '260px';
   setTimeout(() => map.invalidateSize(), 260);
+});
+
+// ── Toggle header ────────────────────────────────────────────────────────────
+const headerEl     = document.getElementById('header');
+const headerToggle = document.getElementById('header-toggle');
+
+headerToggle.addEventListener('click', function() {
+  const collapsed = headerEl.classList.toggle('collapsed');
+  headerToggle.textContent = collapsed ? '▼' : '▲';
+  headerToggle.title = collapsed ? 'Mostrar encabezado' : 'Ocultar encabezado';
+  headerToggle.style.top = collapsed ? '6px' : '10px';
+  setTimeout(() => map.invalidateSize(), 300);
 });
 
 // ── Leyenda ─────────────────────────────────────────────────────────────────
