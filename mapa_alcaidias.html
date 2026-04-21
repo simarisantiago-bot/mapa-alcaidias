@@ -282,13 +282,13 @@
 
 <script>
 const PERFILES = {
-  'COMUNES':        { color: '#3b82f6', label: 'Comunes' },
-  'ABUSO SEXUAL':   { color: '#ef4444', label: 'Abuso sexual' },
-  'MUJERES':        { color: '#ec4899', label: 'Mujeres' },
-  'LGTBIQ+':        { color: '#a855f7', label: 'LGTBIQ+' },
-  'VALETUDINARIOS': { color: '#f97316', label: 'Valetudinarios' },
-  'TRANSITORIOS':   { color: '#6b7280', label: 'Transitorios' },
-  'EX FUERZA':      { color: '#14b8a6', label: 'Ex Fuerza' },
+  'COMUNES':        { color: '#1d4ed8', label: 'Comunes' },
+  'ABUSO SEXUAL':   { color: '#b91c1c', label: 'Abuso sexual' },
+  'MUJERES':        { color: '#be185d', label: 'Mujeres' },
+  'LGTBIQ+':        { color: '#7e22ce', label: 'LGTBIQ+' },
+  'VALETUDINARIOS': { color: '#c2410c', label: 'Valetudinarios' },
+  'TRANSITORIOS':   { color: '#374151', label: 'Transitorios' },
+  'EX FUERZA':      { color: '#0f766e', label: 'Ex Fuerza' },
 };
 
 const datos = [
@@ -376,7 +376,7 @@ const map = L.map('map', {
   zoomControl: true,
 });
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
   subdomains: 'abcd',
   maxZoom: 19,
