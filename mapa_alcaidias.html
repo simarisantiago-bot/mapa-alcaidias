@@ -72,7 +72,43 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      transition: width 0.25s ease, min-width 0.25s ease;
+      position: relative;
     }
+
+    #sidebar.collapsed {
+      width: 0;
+      min-width: 0;
+    }
+
+    #sidebar.collapsed #search-wrap,
+    #sidebar.collapsed #results {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #toggle-btn {
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      transform: translateY(-50%);
+      z-index: 1000;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-left: none;
+      color: #94a3b8;
+      width: 14px;
+      height: 48px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.6rem;
+      transition: background 0.15s;
+    }
+
+    #toggle-btn:hover { background: #0f172a; color: #e2e8f0; }
 
     #search-wrap {
       padding: 10px;
@@ -237,6 +273,7 @@
 
 <div id="content">
   <div id="sidebar">
+    <button id="toggle-btn" title="Mostrar/ocultar panel">◀</button>
     <div id="search-wrap">
       <input id="search-input" type="text" placeholder="🔍 Buscar alcaidía o dirección…" autocomplete="off">
     </div>
@@ -327,6 +364,10 @@ const datos = [
   { n: 'Alcaidía 4 Cochabamba',                 dir: 'Cochabamba 120',                  p: 'TRANSITORIOS',   d: 2,  lat: -34.622793, lng: -58.367105, s: 'Otros' },
 ];
 
+// Elimina íconos default de Leaflet (evita cruces/marcadores rotos)
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({ iconUrl: '', iconRetinaUrl: '', shadowUrl: '' });
+
 // ── Mapa ────────────────────────────────────────────────────────────────────
 const map = L.map('map', {
   center: [-34.6100, -58.4350],
@@ -346,12 +387,12 @@ datos.forEach(function(a) {
   const cfg = PERFILES[a.p] || { color: '#888', label: a.p };
 
   const marker = L.circleMarker([a.lat, a.lng], {
-    radius: a.d > 0 ? Math.max(7, 6 + a.d * 0.6) : 7,
+    radius: a.d > 0 ? Math.max(9, 7 + a.d * 0.6) : 9,
     fillColor: cfg.color,
     color: '#fff',
-    weight: 1.5,
-    opacity: 0.9,
-    fillOpacity: 0.82,
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 1,
   });
 
   const detText = a.d > 0
@@ -437,6 +478,16 @@ function renderResults(query) {
 
 renderResults('');
 searchInput.addEventListener('input', e => renderResults(e.target.value));
+
+// ── Toggle sidebar ───────────────────────────────────────────────────────────
+const sidebar   = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('toggle-btn');
+
+toggleBtn.addEventListener('click', function() {
+  const collapsed = sidebar.classList.toggle('collapsed');
+  toggleBtn.textContent = collapsed ? '▶' : '◀';
+  map.invalidateSize();
+});
 
 // ── Leyenda ─────────────────────────────────────────────────────────────────
 const legend = L.control({ position: 'bottomright' });
