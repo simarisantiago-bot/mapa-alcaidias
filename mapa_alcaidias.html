@@ -579,16 +579,32 @@ const legend = L.control({ position: 'bottomright' });
 
 legend.onAdd = function() {
   const div = L.DomUtil.create('div', 'legend');
-  div.innerHTML = '<h4>Perfil de alojamiento</h4>';
+
+  const header = document.createElement('div');
+  header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;';
+  header.innerHTML = '<h4 style="margin:0">Perfil de alojamiento</h4><span id="legend-toggle" style="font-size:0.7rem;color:#94a3b8;margin-left:8px">▼</span>';
+
+  const body = document.createElement('div');
+  body.id = 'legend-body';
   Object.entries(PERFILES).forEach(([k, v]) => {
-    div.innerHTML += `<div class="legend-row">
+    body.innerHTML += `<div class="legend-row">
       <div class="dot" style="background:${v.color}"></div>
       <span>${v.label}</span>
     </div>`;
   });
-  div.innerHTML += `<div style="margin-top:8px;font-size:0.65rem;color:#64748b;border-top:1px solid #334155;padding-top:6px">
-    Datos al 09-04-2026<br>Coords. aproximadas
+  body.innerHTML += `<div style="margin-top:8px;font-size:0.65rem;color:#64748b;border-top:1px solid #334155;padding-top:6px">
+    Datos al 05-05-2026<br>Coords. aproximadas
   </div>`;
+
+  header.addEventListener('click', function() {
+    const collapsed = body.style.display === 'none';
+    body.style.display = collapsed ? '' : 'none';
+    document.getElementById('legend-toggle').textContent = collapsed ? '▼' : '▲';
+  });
+
+  div.appendChild(header);
+  div.appendChild(body);
+  L.DomEvent.disableClickPropagation(div);
   return div;
 };
 
