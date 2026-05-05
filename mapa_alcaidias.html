@@ -54,6 +54,12 @@
 
     #header-toggle:hover { background: #334155; color: #f1f5f9; }
 
+    #header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
     #header h1 {
       font-size: 1rem;
       color: #f8fafc;
@@ -62,6 +68,32 @@
     }
 
     #header h1 span { color: #60a5fa; }
+
+    #header-totals {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .total-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+    }
+
+    .total-label {
+      color: #94a3b8;
+    }
+
+    .total-val {
+      color: #f1f5f9;
+      font-weight: 700;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 1px 7px;
+    }
 
     .stats {
       display: flex;
@@ -293,11 +325,14 @@
 <body>
 
 <div id="header">
-  <h1>Alcaidías &amp; CAD — <span>Policía de la Ciudad de Buenos Aires</span> · 05-05-2026</h1>
+  <div id="header-left">
+    <h1>Alcaidías &amp; CAD — <span>Policía de la Ciudad de Buenos Aires</span> · 05-05-2026</h1>
+    <div id="header-totals">
+      <span class="total-row"><span class="total-label">Total detenidos a disposición de CABA</span><span class="total-val">195</span></span>
+      <span class="total-row"><span class="total-label">Total Preventiva + Condenados (a entrevistar)</span><span class="total-val">118</span></span>
+    </div>
+  </div>
   <div class="stats">
-    <div class="stat"><div class="n">195</div><div class="l">Total alojados</div></div>
-    <div class="stat"><div class="n">114</div><div class="l">En alcaidías</div></div>
-    <div class="stat"><div class="n">4</div><div class="l">PPL en comisarías</div></div>
     <div class="stat"><div class="n">56</div><div class="l">Puntos mapeados</div></div>
   </div>
 </div>
