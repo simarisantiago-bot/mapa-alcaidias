@@ -293,11 +293,11 @@
 <body>
 
 <div id="header">
-  <h1>Alcaidías &amp; CAD — <span>Policía de la Ciudad de Buenos Aires</span> · 28-04-2026</h1>
+  <h1>Alcaidías &amp; CAD — <span>Policía de la Ciudad de Buenos Aires</span> · 05-05-2026</h1>
   <div class="stats">
-    <div class="stat"><div class="n">163</div><div class="l">Total alojados</div></div>
-    <div class="stat"><div class="n">153</div><div class="l">En alcaidías</div></div>
-    <div class="stat"><div class="n">10</div><div class="l">En CAD</div></div>
+    <div class="stat"><div class="n">195</div><div class="l">Total alojados</div></div>
+    <div class="stat"><div class="n">114</div><div class="l">En alcaidías</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">PPL en comisarías</div></div>
     <div class="stat"><div class="n">56</div><div class="l">Puntos mapeados</div></div>
   </div>
 </div>
@@ -329,75 +329,75 @@ const PERFILES = {
 
 const datos = [
   // ── ESTE 1 ──────────────────────────────────────────────────────────────
-  { n: 'Alcaidía 1 Suipacha',                   dir: 'Suipacha 1156',                   p: 'COMUNES',        d: 1,  lat: -34.607722, lng: -58.379254, s: 'Este 1' },
-  { n: 'Alcaidía 1 Lavalle',                    dir: 'Lavalle 451',                     p: 'COMUNES',        d: 1,  lat: -34.602500, lng: -58.375800, s: 'Este 1' },
-  { n: 'Alcaidía 1 San Juan',                   dir: 'Av. San Juan 1757',               p: 'COMUNES',        d: 4,  lat: -34.622520, lng: -58.390727, s: 'Este 1' },
+  { n: 'Alcaidía 1 Suipacha',                   dir: 'Suipacha 1156',                   p: 'COMUNES',        d: 0,  lat: -34.607722, lng: -58.379254, s: 'Este 1' },
+  { n: 'Alcaidía 1 Lavalle',                    dir: 'Lavalle 451',                     p: 'COMUNES',        d: 2,  lat: -34.602500, lng: -58.375800, s: 'Este 1' },
+  { n: 'Alcaidía 1 San Juan',                   dir: 'Av. San Juan 1757',               p: 'COMUNES',        d: 2,  lat: -34.622520, lng: -58.390727, s: 'Este 1' },
   { n: 'Alcaidía 1 Zanni',                      dir: 'Comodoro Pedro Zanni',            p: 'COMUNES',        d: 1,  lat: -34.584370, lng: -58.370174, s: 'Este 1' },
   { n: 'Alcaidía 1 Perú',                       dir: 'Perú 1050',                       p: 'COMUNES',        d: 3,  lat: -34.620072, lng: -58.374159, s: 'Este 1' },
   { n: 'Alcaidía 1 Tacuarí',                    dir: 'Tacuarí 770',                     p: 'COMUNES',        d: 1,  lat: -34.617236, lng: -58.378623, s: 'Este 1' },
   // ── ESTE 2 ──────────────────────────────────────────────────────────────
-  { n: 'Alcaidía 2 Las Heras',                  dir: 'Las Heras 1861',                  p: 'COMUNES',        d: 2,  lat: -34.587800, lng: -58.395200, s: 'Este 2' },
-  { n: 'Alcaidía 3 Venezuela',                  dir: 'Venezuela 1931',                  p: 'COMUNES',        d: 8,  lat: -34.614937, lng: -58.393772, s: 'Este 2' },
+  { n: 'Alcaidía 2 Las Heras',                  dir: 'Las Heras 1861',                  p: 'COMUNES',        d: 1,  lat: -34.587800, lng: -58.395200, s: 'Este 2' },
+  { n: 'Alcaidía 3 Venezuela',                  dir: 'Venezuela 1931',                  p: 'COMUNES',        d: 7,  lat: -34.614937, lng: -58.393772, s: 'Este 2' },
   { n: 'Alcaidía 3 Catamarca',                  dir: 'Catamarca 1345',                  p: 'COMUNES',        d: 2,  lat: -34.626099, lng: -58.403107, s: 'Este 2' },
   { n: 'Alcaidía 3 Lavalle',                    dir: 'Lavalle 1958',                    p: 'COMUNES',        d: 1,  lat: -34.603415, lng: -58.394823, s: 'Este 2' },
   // ── SUR 1 ───────────────────────────────────────────────────────────────
   { n: 'Alcaidía 4 Zavaleta',                   dir: 'Zavaleta 425',                    p: 'COMUNES',        d: 4,  lat: -34.641950, lng: -58.402830, s: 'Sur 1' },
-  { n: 'Alcaidía 4 Quilmes',                    dir: 'Quilmes 456',                     p: 'COMUNES',        d: 4,  lat: -34.644764, lng: -58.417062, s: 'Sur 1' },
-  { n: 'Complejo California (Comunes)',          dir: 'California 1850',                 p: 'COMUNES',        d: 3,  lat: -34.647216, lng: -58.374693, s: 'Sur 1' },
+  { n: 'Alcaidía 4 Quilmes',                    dir: 'Quilmes 456',                     p: 'COMUNES',        d: 3,  lat: -34.644764, lng: -58.417062, s: 'Sur 1' },
+  { n: 'Complejo California (Comunes)',          dir: 'California 1850',                 p: 'COMUNES',        d: 2,  lat: -34.647216, lng: -58.374693, s: 'Sur 1' },
   { n: 'Complejo California (Abuso Sexual)',     dir: 'California 1850',                 p: 'ABUSO SEXUAL',   d: 3,  lat: -34.647516, lng: -58.374693, s: 'Sur 1' },
   { n: 'Alcaidía 4 Vélez Sarsfield',            dir: 'Luzuriaga 185',                   p: 'COMUNES',        d: 1,  lat: -34.636172, lng: -58.389629, s: 'Sur 1' },
-  { n: 'Alcaidía 4 Montes de Oca (Comunes)',    dir: 'Montes de Oca 861',               p: 'COMUNES',        d: 1,  lat: -34.638071, lng: -58.375028, s: 'Sur 1' },
+  { n: 'Alcaidía 4 Montes de Oca (Comunes)',    dir: 'Montes de Oca 861',               p: 'COMUNES',        d: 0,  lat: -34.638071, lng: -58.375028, s: 'Sur 1' },
   { n: 'Alcaidía 4 Montes de Oca (Asimilados / Ex Fuerza)', dir: 'Montes de Oca 861',  p: 'EX FUERZA',      d: 0,  lat: -34.638371, lng: -58.375028, s: 'Sur 1' },
-  { n: 'Alcaidía 4 Pinzón',                     dir: 'Pinzón 456',                      p: 'COMUNES',        d: 3,  lat: -34.634104, lng: -58.360666, s: 'Sur 1' },
+  { n: 'Alcaidía 4 Pinzón',                     dir: 'Pinzón 456',                      p: 'COMUNES',        d: 1,  lat: -34.634104, lng: -58.360666, s: 'Sur 1' },
   // ── SUR 2 ───────────────────────────────────────────────────────────────
-  { n: 'Complejo 8 (Comunes)',                  dir: 'Delfo Cabrera y 23 de Junio',     p: 'COMUNES',        d: 7,  lat: -34.673689, lng: -58.456554, s: 'Sur 2' },
-  { n: 'Complejo 8 (Abuso Sexual)',             dir: 'Delfo Cabrera y 23 de Junio',     p: 'ABUSO SEXUAL',   d: 7,  lat: -34.673989, lng: -58.456554, s: 'Sur 2' },
+  { n: 'Complejo 8 (Comunes)',                  dir: 'Delfo Cabrera y 23 de Junio',     p: 'COMUNES',        d: 6,  lat: -34.673689, lng: -58.456554, s: 'Sur 2' },
+  { n: 'Complejo 8 (Abuso Sexual)',             dir: 'Delfo Cabrera y 23 de Junio',     p: 'ABUSO SEXUAL',   d: 4,  lat: -34.673989, lng: -58.456554, s: 'Sur 2' },
   { n: 'Alcaidía 8 Ana Díaz',                   dir: 'Ana Díaz 5651',                   p: 'COMUNES',        d: 1,  lat: -34.681581, lng: -58.467409, s: 'Sur 2' },
   { n: 'Alcaidía 8 Martiniano Leguizamón',      dir: 'Martiniano Leguizamón 4347',      p: 'COMUNES',        d: 1,  lat: -34.679117, lng: -58.474946, s: 'Sur 2' },
   { n: 'Complejo 8 Fernández de la Cruz (Abuso)', dir: 'Fernández de la Cruz 5850',     p: 'ABUSO SEXUAL',   d: 11, lat: -34.682402, lng: -58.469346, s: 'Sur 2' },
   // ── SUR 3 ───────────────────────────────────────────────────────────────
-  { n: 'Alcaidía 9 Gana',                       dir: 'Gana 430',                        p: 'COMUNES',        d: 2,  lat: -34.634915, lng: -58.527297, s: 'Sur 3' },
+  { n: 'Alcaidía 9 Gana',                       dir: 'Gana 430',                        p: 'COMUNES',        d: 1,  lat: -34.634915, lng: -58.527297, s: 'Sur 3' },
   { n: 'Alcaidía 9 Barragán',                   dir: 'Barragán 306',                    p: 'COMUNES',        d: 0,  lat: -34.636618, lng: -58.522969, s: 'Sur 3' },
   { n: 'Alcaidía 9 Remedios',                   dir: 'Remedios 3748',                   p: 'COMUNES',        d: 2,  lat: -34.641530, lng: -58.476203, s: 'Sur 3' },
   // ── OESTE 1 ─────────────────────────────────────────────────────────────
   { n: 'Alcaidía 5 Billinghurst',               dir: 'Billinghurst 471',                p: 'COMUNES',        d: 0,  lat: -34.604429, lng: -58.415559, s: 'Oeste 1' },
-  { n: 'Alcaidía 6 Avellaneda',                 dir: 'Av. Avellaneda 1548',             p: 'COMUNES',        d: 2,  lat: -34.620393, lng: -58.453027, s: 'Oeste 1' },
-  { n: 'Alcaidía 6 Díaz Vélez',                 dir: 'Av. Díaz Vélez 5152',             p: 'COMUNES',        d: 1,  lat: -34.608942, lng: -58.439386, s: 'Oeste 1' },
-  { n: 'Alcaidía 6 Muñiz',                      dir: 'Muñiz 1250',                      p: 'COMUNES',        d: 2,  lat: -34.629050, lng: -58.425059, s: 'Oeste 1' },
+  { n: 'Alcaidía 6 Avellaneda',                 dir: 'Av. Avellaneda 1548',             p: 'COMUNES',        d: 1,  lat: -34.620393, lng: -58.453027, s: 'Oeste 1' },
+  { n: 'Alcaidía 6 Díaz Vélez',                 dir: 'Av. Díaz Vélez 5152',             p: 'COMUNES',        d: 0,  lat: -34.608942, lng: -58.439386, s: 'Oeste 1' },
+  { n: 'Alcaidía 6 Muñiz',                      dir: 'Muñiz 1250',                      p: 'COMUNES',        d: 1,  lat: -34.629050, lng: -58.425059, s: 'Oeste 1' },
   // ── OESTE 2 ─────────────────────────────────────────────────────────────
-  { n: 'Alcaidía 10 Chivilcoy',                 dir: 'Chivilcoy 453',                   p: 'COMUNES',        d: 3,  lat: -34.628820, lng: -58.483868, s: 'Oeste 2' },
-  { n: 'Alcaidía 10 Porcel de Peralta',         dir: 'M. Porcel de Peralta 726',        p: 'COMUNES',        d: 3,  lat: -34.629594, lng: -58.524276, s: 'Oeste 2' },
-  { n: 'Alcaidía 10 Rafaela',                   dir: 'Rafaela 4751',                    p: 'COMUNES',        d: 2,  lat: -34.639172, lng: -58.493911, s: 'Oeste 2' },
+  { n: 'Alcaidía 10 Chivilcoy',                 dir: 'Chivilcoy 453',                   p: 'COMUNES',        d: 1,  lat: -34.628820, lng: -58.483868, s: 'Oeste 2' },
+  { n: 'Alcaidía 10 Porcel de Peralta',         dir: 'M. Porcel de Peralta 726',        p: 'COMUNES',        d: 4,  lat: -34.629594, lng: -58.524276, s: 'Oeste 2' },
+  { n: 'Alcaidía 10 Rafaela',                   dir: 'Rafaela 4751',                    p: 'COMUNES',        d: 1,  lat: -34.639172, lng: -58.493911, s: 'Oeste 2' },
   // ── OESTE 3 ─────────────────────────────────────────────────────────────
   { n: 'Alcaidía 7 Rivera Indarte',             dir: 'Rivera Indarte 864',              p: 'COMUNES',        d: 3,  lat: -34.638365, lng: -58.456459, s: 'Oeste 3' },
   // ── NORTE 1 ─────────────────────────────────────────────────────────────
-  { n: 'Alcaidía 12 Ramallo (Comunes)',         dir: 'Ramallo 4398',                    p: 'COMUNES',        d: 4,  lat: -34.551215, lng: -58.490691, s: 'Norte 1' },
-  { n: 'Alcaidía 12 Ramallo (Valetudinarios)',  dir: 'Ramallo 4398',                    p: 'VALETUDINARIOS', d: 5,  lat: -34.551515, lng: -58.490691, s: 'Norte 1' },
+  { n: 'Alcaidía 12 Ramallo (Comunes)',         dir: 'Ramallo 4398',                    p: 'COMUNES',        d: 3,  lat: -34.551215, lng: -58.490691, s: 'Norte 1' },
+  { n: 'Alcaidía 12 Ramallo (Valetudinarios)',  dir: 'Ramallo 4398',                    p: 'VALETUDINARIOS', d: 2,  lat: -34.551515, lng: -58.490691, s: 'Norte 1' },
   { n: 'Alcaidía 12 Machaín',                   dir: 'Machaín 3045',                    p: 'COMUNES',        d: 0,  lat: -34.565176, lng: -58.482616, s: 'Norte 1' },
   { n: 'Alcaidía 12 Olazábal',                  dir: 'Olazábal 5437',                   p: 'COMUNES',        d: 0,  lat: -34.578663, lng: -58.490212, s: 'Norte 1' },
-  { n: 'Alcaidía 12 Juramento',                 dir: 'Juramento 4367',                  p: 'COMUNES',        d: 2,  lat: -34.573050, lng: -58.475918, s: 'Norte 1' },
+  { n: 'Alcaidía 12 Juramento',                 dir: 'Juramento 4367',                  p: 'COMUNES',        d: 0,  lat: -34.573050, lng: -58.475918, s: 'Norte 1' },
   // ── NORTE 2 ─────────────────────────────────────────────────────────────
   { n: 'Alcaidía 13 Cuba',                      dir: 'Cuba 3145',                       p: 'COMUNES',        d: 1,  lat: -34.551211, lng: -58.463378, s: 'Norte 2' },
   { n: 'Alcaidía 13 Artilleros',                dir: 'Artilleros 2081',                 p: 'COMUNES',        d: 0,  lat: -34.554832, lng: -58.444224, s: 'Norte 2' },
-  { n: 'Alcaidía 13 Mendoza',                   dir: 'Mendoza 2263',                    p: 'COMUNES',        d: 1,  lat: -34.560047, lng: -58.456178, s: 'Norte 2' },
+  { n: 'Alcaidía 13 Mendoza',                   dir: 'Mendoza 2263',                    p: 'COMUNES',        d: 0,  lat: -34.560047, lng: -58.456178, s: 'Norte 2' },
   // ── NORTE 3 ─────────────────────────────────────────────────────────────
   { n: 'Alcaidía 14 Julián Alvarez',            dir: 'Julián Alvarez 2373',             p: 'COMUNES',        d: 2,  lat: -34.587649, lng: -58.416014, s: 'Norte 3' },
   { n: 'Alcaidía 14 Cabildo',                   dir: 'Av. Cabildo 232',                 p: 'COMUNES',        d: 4,  lat: -34.573288, lng: -58.439047, s: 'Norte 3' },
-  { n: 'Alcaidía 14 Arabe Siria',               dir: 'Rep. Árabe Siria 2961',           p: 'COMUNES',        d: 3,  lat: -34.581252, lng: -58.413782, s: 'Norte 3' },
+  { n: 'Alcaidía 14 Arabe Siria',               dir: 'Rep. Árabe Siria 2961',           p: 'COMUNES',        d: 4,  lat: -34.581252, lng: -58.413782, s: 'Norte 3' },
   { n: 'Alcaidía 14 Scalabrini Ortiz',          dir: 'Scalabrini Ortiz 1350',           p: 'MUJERES',        d: 0,  lat: -34.592397, lng: -58.427645, s: 'Norte 3' },
   // ── NORTE 4 ─────────────────────────────────────────────────────────────
   { n: 'Complejo Chacarita (LGTBIQ+)',          dir: 'Guzmán 396',                      p: 'LGTBIQ+',        d: 7,  lat: -34.590714, lng: -58.450940, s: 'Norte 4' },
-  { n: 'Complejo Chacarita (Mujeres)',          dir: 'Guzmán 396',                      p: 'MUJERES',        d: 7,  lat: -34.590714, lng: -58.451240, s: 'Norte 4' },
-  { n: 'Complejo Chacarita (Abuso Sexual)',     dir: 'Guzmán 396',                      p: 'ABUSO SEXUAL',   d: 12, lat: -34.591014, lng: -58.450940, s: 'Norte 4' },
+  { n: 'Complejo Chacarita (Mujeres)',          dir: 'Guzmán 396',                      p: 'MUJERES',        d: 4,  lat: -34.590714, lng: -58.451240, s: 'Norte 4' },
+  { n: 'Complejo Chacarita (Abuso Sexual)',     dir: 'Guzmán 396',                      p: 'ABUSO SEXUAL',   d: 9,  lat: -34.591014, lng: -58.450940, s: 'Norte 4' },
   { n: 'Alcaidía 15 Camargo',                   dir: 'Camargo 645',                     p: 'COMUNES',        d: 2,  lat: -34.599361, lng: -58.441147, s: 'Norte 4' },
   // ── CAD ─────────────────────────────────────────────────────────────────
-  { n: 'CAD Norte',                             dir: 'Guzmán 396',                      p: 'TRANSITORIOS',   d: 5,  lat: -34.591014, lng: -58.451240, s: 'CAD' },
-  { n: 'CAD Sur',                               dir: 'Av. Suárez 2050',                 p: 'TRANSITORIOS',   d: 2,  lat: -34.641754, lng: -58.379032, s: 'CAD' },
-  { n: 'CAD Este',                              dir: 'San José 1224',                   p: 'TRANSITORIOS',   d: 3,  lat: -34.622527, lng: -58.385648, s: 'CAD' },
+  { n: 'CAD Norte',                             dir: 'Guzmán 396',                      p: 'TRANSITORIOS',   d: 0,  lat: -34.591014, lng: -58.451240, s: 'CAD' },
+  { n: 'CAD Sur',                               dir: 'Av. Suárez 2050',                 p: 'TRANSITORIOS',   d: 0,  lat: -34.641754, lng: -58.379032, s: 'CAD' },
+  { n: 'CAD Este',                              dir: 'San José 1224',                   p: 'TRANSITORIOS',   d: 0,  lat: -34.622527, lng: -58.385648, s: 'CAD' },
   { n: 'CAD Oeste',                             dir: 'Barragán 317',                    p: 'TRANSITORIOS',   d: 0,  lat: -34.636669, lng: -58.522748, s: 'CAD' },
   // ── OTROS ───────────────────────────────────────────────────────────────
   { n: 'Centro de Contraventores',              dir: 'Beazley 3860',                    p: 'EX FUERZA',      d: 5,  lat: -34.654297, lng: -58.414170, s: 'Otros' },
-  { n: 'Alcaidía 4 Cochabamba',                 dir: 'Cochabamba 120',                  p: 'TRANSITORIOS',   d: 4,  lat: -34.622793, lng: -58.367105, s: 'Otros' },
+  { n: 'Alcaidía 4 Cochabamba',                 dir: 'Cochabamba 120',                  p: 'TRANSITORIOS',   d: 0,  lat: -34.622793, lng: -58.367105, s: 'Otros' },
 ];
 
 // Suprime el ícono default de Leaflet (evita los pines rojos con "+")
