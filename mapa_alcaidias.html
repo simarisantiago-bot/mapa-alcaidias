@@ -320,6 +320,65 @@
       flex-shrink: 0;
       border: 1.5px solid rgba(255,255,255,0.25);
     }
+
+    /* ── MÓVIL ──────────────────────────────────────────────────────────── */
+    @media (max-width: 640px) {
+
+      /* Header compacto */
+      #header {
+        padding: 7px 12px;
+        gap: 5px;
+        max-height: 160px;
+      }
+
+      #header h1 {
+        font-size: 0.78rem;
+      }
+
+      .total-row { font-size: 0.65rem; }
+
+      .stat .n { font-size: 1rem; }
+      .stat .l { font-size: 0.6rem; }
+
+      /* Sidebar flota sobre el mapa en vez de empujarlo */
+      #sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 500;
+        box-shadow: 4px 0 16px rgba(0,0,0,0.4);
+        width: 220px;
+        min-width: 220px;
+      }
+
+      #sidebar.collapsed {
+        width: 0;
+        min-width: 0;
+        box-shadow: none;
+      }
+
+      /* Botón sidebar más grande para touch */
+      #toggle-btn {
+        width: 24px;
+        height: 64px;
+        font-size: 0.75rem;
+        left: 220px;
+      }
+
+      #sidebar.collapsed ~ #toggle-btn { left: 0; }
+
+      /* Botón header más grande para touch */
+      #header-toggle {
+        padding: 5px 24px 7px;
+        font-size: 0.75rem;
+      }
+
+      /* Popup ocupa más ancho */
+      .leaflet-popup-content-wrapper {
+        min-width: 220px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -552,9 +611,19 @@ function renderResults(query) {
 renderResults('');
 searchInput.addEventListener('input', e => renderResults(e.target.value));
 
+// ── Detección móvil ──────────────────────────────────────────────────────────
+const isMobile = window.innerWidth <= 640;
+
 // ── Toggle sidebar ───────────────────────────────────────────────────────────
 const sidebar   = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggle-btn');
+
+// En móvil: sidebar colapsada por defecto
+if (isMobile) {
+  sidebar.classList.add('collapsed');
+  toggleBtn.textContent = '▶';
+  toggleBtn.style.left = '0';
+}
 
 toggleBtn.addEventListener('click', function() {
   const collapsed = sidebar.classList.toggle('collapsed');
@@ -601,6 +670,15 @@ legend.onAdd = function() {
     body.style.display = collapsed ? '' : 'none';
     document.getElementById('legend-toggle').textContent = collapsed ? '▼' : '▲';
   });
+
+  // En móvil: leyenda colapsada por defecto
+  if (isMobile) {
+    body.style.display = 'none';
+    document.getElementById && setTimeout(() => {
+      const t = document.getElementById('legend-toggle');
+      if (t) t.textContent = '▲';
+    }, 0);
+  }
 
   div.appendChild(header);
   div.appendChild(body);
