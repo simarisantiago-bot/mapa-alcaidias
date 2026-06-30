@@ -532,10 +532,6 @@ datos.forEach(function(a) {
     fillOpacity: 1,
   });
 
-  const detText = a.d > 0
-    ? `<strong>${a.d}</strong> detenido${a.d !== 1 ? 's' : ''}`
-    : '<span style="color:#64748b">Sin datos</span>';
-
   const entText = a.e > 0
     ? `<strong>${a.e}</strong> a entrevistar`
     : '<span style="color:#64748b">0</span>';
@@ -545,7 +541,6 @@ datos.forEach(function(a) {
       <div class="seccion">Alcaidía ${a.s}</div>
       <h3>${a.n}</h3>
       <div class="row">📍 <strong>${a.dir}</strong></div>
-      <div class="row">👤 Detenidos: ${detText}</div>
       <div class="row">🗣️ A entrevistar: ${entText}</div>
       <div><span class="badge" style="background:${cfg.color}">${cfg.label.toUpperCase()}</span></div>
     </div>
