@@ -387,7 +387,7 @@
   <h1>Alcaidías &amp; CAD — <span>Policía de la Ciudad de Buenos Aires</span> · 26-06-2026</h1>
   <div class="stats">
     <div class="stat"><div class="n">40</div><div class="l">Total a entrevistar</div></div>
-    <div class="stat"><div class="n">60</div><div class="l">Puntos mapeados</div></div>
+    <div class="stat"><div class="n">28</div><div class="l">Puntos mapeados</div></div>
   </div>
 </div>
 <div id="header-bar">
@@ -516,11 +516,11 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 // ── Marcadores ──────────────────────────────────────────────────────────────
 const markers = [];
 
-datos.forEach(function(a) {
+datos.filter(a => a.e > 0).forEach(function(a) {
   const cfg = PERFILES[a.p] || { color: '#888', label: a.p };
 
   const marker = L.circleMarker([a.lat, a.lng], {
-    radius: a.d > 0 ? Math.max(9, 7 + a.d * 0.6) : 9,
+    radius: Math.max(9, 7 + a.e * 0.6),
     fillColor: cfg.color,
     color: '#fff',
     weight: 2,
